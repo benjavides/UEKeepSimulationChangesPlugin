@@ -22,6 +22,8 @@ In any blueprint add the exposed nodes
 - Keep Actor Simulated Changes: Will only save the settings of the specified actor.
 - Keep Selected Actors Simulated Changes: Will save the settings of all the actors selected in the editor Hierarchy. It's Unreal's default behavior when pressing "k" in Play mode.
 
+OR
+
 Add the `KeepSimulationChanges` component to any actor and it will save the simulated changes `OnEndPlay`
 
 
