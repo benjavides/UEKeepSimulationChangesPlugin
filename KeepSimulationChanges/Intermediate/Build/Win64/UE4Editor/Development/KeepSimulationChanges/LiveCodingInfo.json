@@ -1,0 +1,13 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.KeepSimulationChanges.cpp.obj": [
+			"KeepSimulationChanges.cpp.obj",
+			"KeepSimulationChangesBPLibrary.cpp.obj"
+		],
+		"Module.KeepSimulationChanges.gen.cpp.obj": [
+			"KeepSimulationChanges.init.gen.cpp.obj",
+			"KeepSimulationChangesBPLibrary.gen.cpp.obj"
+		]
+	}
+}

@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-KeepSimulationChanges.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Intermediate\Build\Win64\EmptyProject427Editor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Intermediate\Build\Win64\UE4Editor\Development\KeepSimulationChanges\Module.KeepSimulationChanges.cpp.obj"
+"E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Intermediate\Build\Win64\UE4Editor\Development\KeepSimulationChanges\Module.KeepSimulationChanges.gen.cpp.obj"
+"E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Intermediate\Build\Win64\UE4Editor\Development\KeepSimulationChanges\Default.rc2.res"
+/OUT:"E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Intermediate\Build\Win64\UE4Editor\Development\KeepSimulationChanges\UE4Editor-KeepSimulationChanges.lib"

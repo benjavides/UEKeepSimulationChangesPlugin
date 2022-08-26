@@ -1,0 +1,15 @@
+E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Intermediate\Build\Win64\UE4Editor\Development\KeepSimulationChanges\Definitions.KeepSimulationChanges.h
+E:/Documents/Proyectos/1.Pi/EmptyUnreal427Project/EmptyUnreal427Project/Plugins/KeepSimulationChanges/Source/KeepSimulationChanges/Private/KeepSimulationChanges.cpp
+E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Source\KeepSimulationChanges\Public\KeepSimulationChanges.h
+E:/Documents/Proyectos/1.Pi/EmptyUnreal427Project/EmptyUnreal427Project/Plugins/KeepSimulationChanges/Source/KeepSimulationChanges/Private/KeepSimulationChangesBPLibrary.cpp
+E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Source\KeepSimulationChanges\Public\KeepSimulationChangesBPLibrary.h
+E:\Documents\Proyectos\1.Pi\EmptyUnreal427Project\EmptyUnreal427Project\Plugins\KeepSimulationChanges\Intermediate\Build\Win64\UE4Editor\Inc\KeepSimulationChanges\KeepSimulationChangesBPLibrary.generated.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Editor\LevelEditor\Public\LevelEditorActions.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Editor\UnrealEd\Classes\TexAligner/TexAligner.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd\TexAligner.generated.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Editor\LevelEditor\Public\LightmapResRatioAdjust.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Editor\LevelEditor\Public\LevelEditor.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Editor\LevelEditor\Public\ILevelEditor.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Editor\LevelEditor\Public\ViewportTypeDefinition.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Runtime\Slate\Public\Widgets/Notifications/SNotificationList.h
+D:\Program Files\Epic Games\UE_4.27\Engine\Source\Runtime\Slate\Public\Framework/Notifications/NotificationManager.h

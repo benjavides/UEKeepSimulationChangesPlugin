@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Keep Simulation Changes",
+	"Description": "Expose to blueprints an engine function to save changes made to an actor during Play mode",
+	"Category": "Runtime",
+	"CreatedBy": "Benjavides",
+	"CreatedByURL": "https://www.benjavides.com/",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "KeepSimulationChanges",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen"
+		}
+	]
+}
