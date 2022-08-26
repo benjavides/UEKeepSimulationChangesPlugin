@@ -1,5 +1,5 @@
 # README
-> Unreal Engine plugin to expose an engine function to save the changes made to an actor in blueprints
+> Unreal Engine plugin to expose an engine function to save the changes made to an actor in blueprints. Tested in Unreal 4.27.2
 
 ![image-20220826174114969](README.assets/image-20220826174114969.png)
 
