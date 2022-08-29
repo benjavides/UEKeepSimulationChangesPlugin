@@ -29,84 +29,86 @@ void UKeepSimulationChangesBPLibrary::KeepSelectedActorsSimulatedChanges()
 
 void UKeepSimulationChangesBPLibrary::KeepActorSimulatedChanges(AActor* actor)
 {
-	TArray<class USkeletalMeshComponent*> ComponentsToReinitialize;
+	if (IsValid(actor)) {
+		TArray<class USkeletalMeshComponent*> ComponentsToReinitialize;
 
-	auto* SimWorldActor = CastChecked<AActor>(actor);
+		auto* SimWorldActor = CastChecked<AActor>(actor);
 
-	// Find our counterpart actor
-	AActor* EditorWorldActor = EditorUtilities::GetEditorWorldCounterpartActor(SimWorldActor);
-	if (EditorWorldActor != NULL)
-	{
-		int32 UpdatedActorCount = 0;
-		int32 TotalCopiedPropertyCount = 0;
-		FString FirstUpdatedActorLabel;
-		SaveAnimationFromSkeletalMeshComponent(EditorWorldActor, SimWorldActor, ComponentsToReinitialize);
-
-		// We only want to copy CPF_Edit properties back, or properties that are set through editor manipulation
-		// NOTE: This needs to match what we're doing in the BuildSelectedActorInfo() function
-		const auto CopyOptions = (EditorUtilities::ECopyOptions::Type)(
-			EditorUtilities::ECopyOptions::CallPostEditChangeProperty |
-			EditorUtilities::ECopyOptions::CallPostEditMove |
-			EditorUtilities::ECopyOptions::OnlyCopyEditOrInterpProperties |
-			EditorUtilities::ECopyOptions::FilterBlueprintReadOnly);
-		const int32 CopiedPropertyCount = EditorUtilities::CopyActorProperties(SimWorldActor, EditorWorldActor, CopyOptions);
-
-		if (CopiedPropertyCount > 0)
+		// Find our counterpart actor
+		AActor* EditorWorldActor = EditorUtilities::GetEditorWorldCounterpartActor(SimWorldActor);
+		if (EditorWorldActor != NULL)
 		{
-			++UpdatedActorCount;
-			TotalCopiedPropertyCount += CopiedPropertyCount;
+			int32 UpdatedActorCount = 0;
+			int32 TotalCopiedPropertyCount = 0;
+			FString FirstUpdatedActorLabel;
+			SaveAnimationFromSkeletalMeshComponent(EditorWorldActor, SimWorldActor, ComponentsToReinitialize);
 
-			if (FirstUpdatedActorLabel.IsEmpty())
-			{
-				FirstUpdatedActorLabel = EditorWorldActor->GetActorLabel();
-			}
-		}
+			// We only want to copy CPF_Edit properties back, or properties that are set through editor manipulation
+			// NOTE: This needs to match what we're doing in the BuildSelectedActorInfo() function
+			const auto CopyOptions = (EditorUtilities::ECopyOptions::Type)(
+				EditorUtilities::ECopyOptions::CallPostEditChangeProperty |
+				EditorUtilities::ECopyOptions::CallPostEditMove |
+				EditorUtilities::ECopyOptions::OnlyCopyEditOrInterpProperties |
+				EditorUtilities::ECopyOptions::FilterBlueprintReadOnly);
+			const int32 CopiedPropertyCount = EditorUtilities::CopyActorProperties(SimWorldActor, EditorWorldActor, CopyOptions);
 
-		// Let the user know what happened
-		{
-			FNotificationInfo NotificationInfo(FText::GetEmpty());
-			NotificationInfo.bFireAndForget = true;
-			NotificationInfo.FadeInDuration = 0.25f;
-			NotificationInfo.FadeOutDuration = 1.0f;
-			NotificationInfo.ExpireDuration = 1.0f;
-			NotificationInfo.bUseLargeFont = false;
-			NotificationInfo.bUseSuccessFailIcons = true;
-			NotificationInfo.bAllowThrottleWhenFrameRateIsLow = false;	// Don't throttle as it causes distracting hitches in Simulate mode
-			SNotificationItem::ECompletionState CompletionState;
-			if (UpdatedActorCount > 0)
+			if (CopiedPropertyCount > 0)
 			{
-				if (UpdatedActorCount > 1)
+				++UpdatedActorCount;
+				TotalCopiedPropertyCount += CopiedPropertyCount;
+
+				if (FirstUpdatedActorLabel.IsEmpty())
 				{
-					FFormatNamedArguments Args;
-					Args.Add(TEXT("UpdatedActorCount"), UpdatedActorCount);
-					Args.Add(TEXT("TotalCopiedPropertyCount"), TotalCopiedPropertyCount);
-					NotificationInfo.Text = FText::Format(NSLOCTEXT("LevelEditorCommands", "KeepSimulationChanges_MultipleActorsUpdatedNotification", "Saved state for {UpdatedActorCount} actors  ({TotalCopiedPropertyCount} properties)"), Args);
+					FirstUpdatedActorLabel = EditorWorldActor->GetActorLabel();
+				}
+			}
+
+			// Let the user know what happened
+			{
+				FNotificationInfo NotificationInfo(FText::GetEmpty());
+				NotificationInfo.bFireAndForget = true;
+				NotificationInfo.FadeInDuration = 0.25f;
+				NotificationInfo.FadeOutDuration = 1.0f;
+				NotificationInfo.ExpireDuration = 1.0f;
+				NotificationInfo.bUseLargeFont = false;
+				NotificationInfo.bUseSuccessFailIcons = true;
+				NotificationInfo.bAllowThrottleWhenFrameRateIsLow = false;	// Don't throttle as it causes distracting hitches in Simulate mode
+				SNotificationItem::ECompletionState CompletionState;
+				if (UpdatedActorCount > 0)
+				{
+					if (UpdatedActorCount > 1)
+					{
+						FFormatNamedArguments Args;
+						Args.Add(TEXT("UpdatedActorCount"), UpdatedActorCount);
+						Args.Add(TEXT("TotalCopiedPropertyCount"), TotalCopiedPropertyCount);
+						NotificationInfo.Text = FText::Format(NSLOCTEXT("LevelEditorCommands", "KeepSimulationChanges_MultipleActorsUpdatedNotification", "Saved state for {UpdatedActorCount} actors  ({TotalCopiedPropertyCount} properties)"), Args);
+					}
+					else
+					{
+						FFormatNamedArguments Args;
+						Args.Add(TEXT("FirstUpdatedActorLabel"), FText::FromString(FirstUpdatedActorLabel));
+						Args.Add(TEXT("TotalCopiedPropertyCount"), TotalCopiedPropertyCount);
+						NotificationInfo.Text = FText::Format(NSLOCTEXT("LevelEditorCommands", "KeepSimulationChanges_ActorUpdatedNotification", "Saved state for {FirstUpdatedActorLabel} ({TotalCopiedPropertyCount} properties)"), Args);
+					}
+					CompletionState = SNotificationItem::CS_Success;
 				}
 				else
 				{
-					FFormatNamedArguments Args;
-					Args.Add(TEXT("FirstUpdatedActorLabel"), FText::FromString(FirstUpdatedActorLabel));
-					Args.Add(TEXT("TotalCopiedPropertyCount"), TotalCopiedPropertyCount);
-					NotificationInfo.Text = FText::Format(NSLOCTEXT("LevelEditorCommands", "KeepSimulationChanges_ActorUpdatedNotification", "Saved state for {FirstUpdatedActorLabel} ({TotalCopiedPropertyCount} properties)"), Args);
+					NotificationInfo.Text = NSLOCTEXT("LevelEditorCommands", "KeepSimulationChanges_NoActorsUpdated", "No properties were copied");
+					CompletionState = SNotificationItem::CS_Fail;
 				}
-				CompletionState = SNotificationItem::CS_Success;
+				const auto Notification = FSlateNotificationManager::Get().AddNotification(NotificationInfo);
+				Notification->SetCompletionState(CompletionState);
 			}
-			else
-			{
-				NotificationInfo.Text = NSLOCTEXT("LevelEditorCommands", "KeepSimulationChanges_NoActorsUpdated", "No properties were copied");
-				CompletionState = SNotificationItem::CS_Fail;
-			}
-			const auto Notification = FSlateNotificationManager::Get().AddNotification(NotificationInfo);
-			Notification->SetCompletionState(CompletionState);
 		}
-	}
 
-	// need to reinitialize animation
-	for (auto MeshComp : ComponentsToReinitialize)
-	{
-		if (MeshComp->SkeletalMesh)
+		// need to reinitialize animation
+		for (auto MeshComp : ComponentsToReinitialize)
 		{
-			MeshComp->InitAnim(true);
+			if (MeshComp->SkeletalMesh)
+			{
+				MeshComp->InitAnim(true);
+			}
 		}
 	}
 }
