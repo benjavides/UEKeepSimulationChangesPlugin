@@ -1,9 +1,10 @@
 # README
-> Unreal Engine plugin to expose an engine function to save the changes made to an actor in blueprints. Tested in Unreal 4.27.2
+> Unreal Engine plugin to expose an engine function to save the changes made to an actor in blueprints. Tested in Unreal 4.27.2. 
 
 ![image-20220826174114969](README.assets/image-20220826174114969.png)
 
 # Setup
+> A precompiled version for Unreal 5.0.3 is avaliable in the releases section of the repo.
 
 1. Put the `KeepSimulationChanges` folder in either
 
